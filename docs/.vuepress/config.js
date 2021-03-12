@@ -14,6 +14,13 @@ module.exports = {
     ], //在移动端，搜索框在获得焦点时会放大
   ],
   theme: "reco", //选择主题‘reco’
+  locales: {
+    // 键名是该语言所属的子路径
+    // 作为特例，默认语言可以使用 '/' 作为其路径。
+    '/': {
+      lang: 'zh-CN',
+    },
+  },
   themeConfig: {
     type: "blog", //选择类型博客
     fullscreen: true,
@@ -34,25 +41,10 @@ module.exports = {
     },
     nav: [
       //导航栏设置
-      { text: "主页", link: "/", icon: "reco-home" },
-      { text: "时间线", link: "/timeline/", icon: "reco-date" },
-      { text: "订阅", link: "https://tsanfer.xyz/rss.xml", icon: "reco-rss" },
-      {
-        text: "工具",
-        icon: "reco-api",
-        items: [
-          // {
-          //   text: "个人网盘",
-          //   link: "http://clouddisk.tsanfer.xyz:8081",
-          //   icon: "fa-hdd",
-          // },
-          // {
-          //   text: "订阅转换器",
-          //   link: "https://tsanfer.xyz/sub-web/",
-          //   icon: "fa-exchange-alt",
-          // },
-        ],
-      },
+      { text: '主页', link: '/', icon: 'reco-home' },
+      { text: '时间线', link: '/timeline/', icon: 'reco-date' },
+      { text: '侧边栏', link: '/views/sidebar/' },
+      { text: 'sidebar', link: '/views/sidebargroup/' },
       {
         text: "联系",
         icon: "reco-message",
@@ -81,54 +73,36 @@ module.exports = {
     //   ['/views/FrontEndSphinx_GitHub_ReadtheDocs.md', 'ReadtheDocs'],
     // ],
     sidebar: {
-      "/views/FrontEnd/": [
+      '/views/sidebar/': [
+        '',
+        'bar1',
+        'bar2'
+      ],
+      '/views/sidebargroup/': [
         {
-          title: "前端", // 必要的
-          // path: '/foo/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          sidebarDepth: 2, // 可选的, 默认值是 1
+          title: '基础',
+          collapsable: true,
           children: [
-            "vuepress_theme_reco-Github_Actions",
-            "VuePress_GithubPages_TravisCI",
-            "Sphinx_GitHub_ReadtheDocs",
-          ],
+            '',
+            'bar1'
+          ]
         },
-      ],
-      "/views/MCU/": [
         {
-          title: "MCU", // 必要的
-          // path: '/foo/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          sidebarDepth: 2, // 可选的, 默认值是 1
+          title: '进阶',
+          collapsable: true,
           children: [
-            "Linux_board_NFS",
-            "First Prepare for Lanqiao Cup MCU Competition",
-          ],
+            'bar2'
+          ]
         },
-      ],
-      "/views/Computer/": [
-        {
-          title: "计算机", // 必要的
-          // path: '/foo/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          sidebarDepth: 2, // 可选的, 默认值是 1
-          children: ["Storage hardware"],
-        },
-      ],
-      "/views/Tool/": [
-        {
-          title: "工具", // 必要的
-          // path: '/foo/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-          sidebarDepth: 2, // 可选的, 默认值是 1
-          children: ["ffmpeg", "scrcpy"],
-        },
-      ],
+      ]
     },
     // displayAllHeaders: true, // 默认值：false
     subSidebar: "auto",
-
-    record: "",
-    recordLink: "",
-    cyberSecurityRecord: "",
-    cyberSecurityLink:
-      "",
+   // 备案号
+   record: 'xxxx',
+   recordLink: 'http://www.baidu.com',
+   cyberSecurityRecord: '2222',
+   cyberSecurityLink: 'http://www.baidu.com',
     startYear: "2021", // 项目开始时间，只填写年份
     lastUpdated: "最后更新时间", // string | boolean
     author: "ma-xx",
