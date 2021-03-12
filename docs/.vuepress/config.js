@@ -124,7 +124,7 @@ module.exports = {
     toc: { includeLevel: [1, 2] },
     extendMarkdown: md => {
       // 使用更多的 markdown-it 插件!
-      md.use(require('markdown-it-xxx'))
+      md.use(require('markdown-it'))
     }
   }, // 搜索设置
   search: true,
