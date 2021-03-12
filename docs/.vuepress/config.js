@@ -115,11 +115,6 @@ module.exports = {
         mode: "light", //默认显示白天模式
         codeTheme: "okaidia", // default 'tomorrow'
         smooth: "true", //平滑滚动
-        // 评论设置
-        valineConfig: {
-            appId: process.env.LEANCLOUD_APP_ID || '69aDCp6uj6RglRfI1XwkIRef-gzGzoHsz',
-            appKey: process.env.LEANCLOUD_APP_KEY || 'dMcfGj9gFkPeDlADN2PX3lbq',
-        },
     },
     markdown: {
         lineNumbers: true, //代码显示行号
@@ -158,6 +153,13 @@ module.exports = {
                 copyright: "ma-xx", //版权署名
             },
         ],
+        ['@vuepress-reco/comments', {
+            solution: 'valine',
+            options: {
+              appId: process.env.LEANCLOUD_APP_ID || '69aDCp6uj6RglRfI1XwkIRef-gzGzoHsz',
+              appKey: process.env.LEANCLOUD_APP_KEY || 'dMcfGj9gFkPeDlADN2PX3lbq',
+            }
+        }],
         ["flowchart"], // 支持流程图
         // ["vuepress-plugin-smooth-scroll"], // 平滑滚动
         ["@vuepress/nprogress"], // 加载进度条
