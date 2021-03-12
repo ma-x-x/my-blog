@@ -117,8 +117,8 @@ module.exports = {
         smooth: "true", //平滑滚动
         // 评论设置
         valineConfig: {
-            appId: process.env.LEANCLOUD_APP_ID,
-            appKey: process.env.LEANCLOUD_APP_KEY,
+            appId: process.env.LEANCLOUD_APP_ID || '69aDCp6uj6RglRfI1XwkIRef-gzGzoHsz',
+            appKey: process.env.LEANCLOUD_APP_KEY || 'dMcfGj9gFkPeDlADN2PX3lbq',
         },
     },
     markdown: {
