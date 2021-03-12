@@ -156,8 +156,8 @@ module.exports = {
         ['@vuepress-reco/comments', {
             solution: 'valine',
             options: {
-              appId: process.env.LEANCLOUD_APP_ID || '69aDCp6uj6RglRfI1XwkIRef-gzGzoHsz',
-              appKey: process.env.LEANCLOUD_APP_KEY || 'dMcfGj9gFkPeDlADN2PX3lbq',
+                appId: process.env.LEANCLOUD_APP_ID,
+                appKey: process.env.LEANCLOUD_APP_KEY,
             }
         }],
         ["flowchart"], // 支持流程图
@@ -165,5 +165,6 @@ module.exports = {
         ["@vuepress/nprogress"], // 加载进度条
         ["reading-progress"], // 阅读进度条
         ["vuepress-plugin-code-copy", true], //一键复制代码插件
+        ["'@vuepress-reco/extract-code'"], // 展示代码
     ],
 };
