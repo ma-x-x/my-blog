@@ -47,10 +47,10 @@ module.exports = {
     },
     nav: [
       //导航栏设置
-      { text: '主页', link: '/', icon: 'reco-home' },
+      { text: '首页', link: '/', icon: 'reco-home' },
+      { text: '笔记', link: '/views/notes/' },
       { text: '时间线', link: '/timeline/', icon: 'reco-date' },
-      { text: '侧边栏', link: '/views/sidebar/' },
-      { text: 'sidebar', link: '/views/sidebargroup/' },
+      { text: '留言板', link: '/views/message-board/' },
       {
         text: "联系",
         icon: "reco-message",
@@ -78,26 +78,10 @@ module.exports = {
     //   ['/views/FrontEndSphinx_GitHub_ReadtheDocs.md', 'ReadtheDocs'],
     // ],
     sidebar: {
-      '/views/sidebar/': [
+      '/views/notes/': [
         '',
         'bar1',
         'bar2'
-      ],
-      '/views/sidebargroup/': [{
-        title: '基础',
-        collapsable: true,
-        children: [
-          '',
-          'bar1'
-        ]
-      },
-      {
-        title: '进阶',
-        collapsable: true,
-        children: [
-          'bar2'
-        ]
-      },
       ]
     },
     // displayAllHeaders: true, // 默认值：false
