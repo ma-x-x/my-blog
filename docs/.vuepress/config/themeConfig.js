@@ -42,4 +42,7 @@ module.exports = {
     mode: "light", //默认显示白天模式
     codeTheme: "okaidia", // default 'tomorrow'
     smooth: "true", //平滑滚动
+    editLinks: true,
+    editLinkText: '编辑文档！',
+    docsDir: 'docs',
 };
