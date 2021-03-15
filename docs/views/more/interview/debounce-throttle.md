@@ -72,7 +72,7 @@ title: 函数节流与防抖
    
  >正常情况、函数防抖情况 debounce、函数节流 throttle下，对于mousemove事件回调的执行情况如下：
 
-  ![防抖节流](images/interview/debounce-throttle.png)
+  ![防抖节流](/my-blog/images/interview/debounce-throttle.png)
 
   # 应用场景
 
