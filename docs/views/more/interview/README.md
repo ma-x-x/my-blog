@@ -1,5 +1,7 @@
 ---
 title: 首页
+sticky: 1 
+type: 1
 ---
 
 ## 介绍
