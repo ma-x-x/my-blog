@@ -25,7 +25,8 @@ module.exports = {
     extraWatchFiles: [ //指定额外的需要被监听的文件
         './config/plugsConfig.js',
         './config/themeConfig.js',
-        './config/navConfig.js'
+        './config/navConfig.js',
+        'docs/.vuepress/config/*.js'
     ],
     theme: "reco", //选择主题‘reco’
     locales: {

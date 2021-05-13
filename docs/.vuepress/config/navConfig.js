@@ -16,16 +16,19 @@ module.exports = [
         items: [{
                 text: '前端',
                 link: '/views/front-end/',
-                items: [
+            items: [
+                    { text: 'Html', link: '/views/front-end/html/' },
+                    { text: 'CSS', link: '/views/front-end/css/' },
                     { text: 'JavaScript', link: '/views/front-end/javascript/' },
                     { text: 'TypeScript', link: '/views/front-end/typescript/' },
-                    { text: 'CSS', link: '/views/front-end/css/' },
+                    { text: 'React', link: '/views/front-end/react/' },
                     { text: 'Vue', link: '/views/front-end/vue/' },
-                    { text: 'Webpack', link: '/views/front-end/webpack/' },
                     { text: 'Flutter', link: '/views/front-end/flutter/' },
                     { text: 'D3', link: '/views/front-end/d3js/' },
                     { text: 'Jest', link: '/views/front-end/jest/' },
                     { text: 'Utils', link: '/views/front-end/utils/' },
+                    { text: 'Webpack', link: '/views/front-end/webpack/' },
+                    { text: 'Deploy', link: '/views/front-end/deploy/' },
                 ]
             },
             {

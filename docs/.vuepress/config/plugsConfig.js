@@ -58,5 +58,11 @@ module.exports = [
         collapsable: true,
         nav: true,
         titleMode: "uppercase",
+        sort: {
+            // 更多选项: 
+            // `asc`、`desc`、`created_time_asc`、`created_time_desc`
+            mode: "asc",
+            readmeFirst: true,
+        }
     }]
 ]
