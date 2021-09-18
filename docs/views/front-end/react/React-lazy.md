@@ -1,4 +1,6 @@
+---
 title: React.lazy懒加载组件
+---
 
 # [React.lazy懒加载组件](https://www.cnblogs.com/mengff/p/12891500.html)
 
