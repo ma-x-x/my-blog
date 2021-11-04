@@ -30,6 +30,9 @@
   },
   "description": "",
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@vuepress/plugin-last-updated": "^1.8.2",
+    "@vuepress/plugin-medium-zoom": "^1.8.2",
+    "cross-env": "^7.0.3",
+    "moment": "^2.29.1"
   }
 }
