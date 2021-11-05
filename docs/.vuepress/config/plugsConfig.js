@@ -31,6 +31,7 @@ module.exports = [
   ],
 
   ["flowchart"], // 支持流程图
+  ['vuepress-plugin-mermaidjs'] // 支持时序图、甘特图,
   ["vuepress-plugin-smooth-scroll"], // 平滑滚动
   ["@vuepress/nprogress"], // 加载进度条
   ["reading-progress"], // 阅读进度条
