@@ -11,7 +11,7 @@ module.exports = {
      如果你想将你的网站部署到 https://foo.github.io/bar/，那么 base 应该被设置成 "/bar/"，
      它的值应当总是以斜杠开始，并以斜杠结束。
     */
-  base: "/my-blog/",
+  base: "/",
   head: [
     ["link", { rel: "icon", href: "/favicon.svg" }], //浏览器的标签栏的网页图标,基地址/docs/.vuepress/public
     [
