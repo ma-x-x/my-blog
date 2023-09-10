@@ -38,8 +38,6 @@ console.log(num5 === num5 + 3); // false
 // 再往后的就自行测试吧
 ```
 
-
-
 ## 解决大数相加的问题
 
 ### 1. 将数字转化为字符串
@@ -66,11 +64,6 @@ console.log(add(10000000000000000000000000, 11111111111111111111111111) === 2111
 
 ### 2. 直接使用 [bigNumber.js](https://github.com/MikeMcl/bignumber.js/) 库
 
-
-
 ## 参考资料
 
  [js实现大数相加](http://www.plqblog.com/views/article.php?id=29)
-
-
-

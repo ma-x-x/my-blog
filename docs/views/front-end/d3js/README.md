@@ -6,8 +6,6 @@ title: 首页
 
 关于 D3js 的一些笔记，使用较少易忘。
 
-
-
 ## 参考资料
 
 1. [SVG 元素](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element)

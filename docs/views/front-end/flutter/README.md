@@ -9,24 +9,20 @@ Flutter 官网地址为 [flutter.dev](https://flutter.dev/)
 
 开发环境为 `manjaro`。
 
-
-
 ::: danger 补充
 
 有意思的是，当我重新安装 `flutter` 后：
 
- ````bash
+```bash
 # 此处为 gitlab 非 gitee
 git clone https://github.com/flutter/flutter.git
- ````
+```
 
 以下在安装和使用时遇到的问题就消失了，但其中发生了什么也不可考究了。
 
 所以不妨先按以下进行操作，最后再切换为 `github` 的仓库。
 
 :::
-
-
 
 ## 安装
 
@@ -55,8 +51,6 @@ systemctl start snapd.service
 ```
 
 再继续执行上一步的安装命令，等待安装完成。
-
-
 
 当然，由于网速问题，我选择了使用 `git` 下载的方式，并使用了 `gitee` 的仓库：
 
@@ -124,7 +118,7 @@ sudo pacman -S android-studio
 ```bash
 Doctor summary (to see all details, run flutter doctor -v):
 [✓] Flutter (Channel unknown, 1.22.0, on Linux, locale zh_CN.UTF-8)
- 
+
 [!] Android toolchain - develop for Android devices (Android SDK version
     30.0.2)
     ✗ Android licenses not accepted.  To resolve this, run: flutter doctor
@@ -144,8 +138,6 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 糟糕的是，在 `flutter doctor` 检测下依然会提示未安装，但使用是可以使用的，[ubuntu 20.04 也存在该问题](https://stackoverflow.com/questions/57085479/android-studio-flutter-plugin-not-installed-this-adds-flutter-specific-functi)。
 
-
-
 ### 6. toolchain
 
 可以直接忽略：
@@ -153,8 +145,6 @@ Doctor summary (to see all details, run flutter doctor -v):
 ```bash
 flutter doctor --android-licenses
 ```
-
-
 
 ## 使用
 
@@ -189,8 +179,6 @@ flutter run -v
 
 回到之前 `git clone flutter` 的位置，找到 `packages/flutter_tools/templates/app/android.tmpl/gradle/wrapper/gradle-wrapper.properties` 文件，将  `distributionUrl` 指向 `file\:///home/your_name/.gradle/wrapper/dists/gradle-5.6.2-all.zip` 即可。
 
-
-
 ## 配置
 
 ### 1. 禁用 ios
@@ -203,4 +191,3 @@ flutter config --no-enable-ios
 # Settings:
 #   enable-ios: false
 ```
-
