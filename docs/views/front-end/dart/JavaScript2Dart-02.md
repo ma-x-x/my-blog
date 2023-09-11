@@ -1,268 +1,334 @@
 ---
-title: Dart
+title: JavaScript2Dart-02
 sidebarDepth: 2
 ---
 
-### 运营商
+### 功能
 
-Dart 和 JavaScript 都包含预定义的运算符。这两种语言都不支持添加新的运算符。Dart 支持使用`operator`关键字重载一些现有的运算符。例如：
+虽然 Dart 函数的工作方式与 JavaScript 中的对应函数非常相似，但它们确实有一些附加功能，并且在声明它们时存在一些细微的语法差异。与 JavaScript 类似，您几乎可以在任何地方声明函数，无论是在顶层、作为类字段还是在本地范围内。
 
 ```
-class Vector {
-  final double x;
-  final double y;
-  final double z;
-  Vector(this.x, this.y, this.z);
-  Vector operator +(Vector other) => Vector(
-    x + other.x,
-    y + other.y,
-    z + other.z,
-  );
-  Vector operator *(double scalar) => Vector(
-    x * scalar,
-    y * scalar,
-    z * scalar,
-  );
+// On the top level
+function multiply(a, b) {
+  return a * b;
+}
+
+// As a class field
+class Multiplier {
+  multiply(a, b) {
+    return a * b;
+  }
+}
+
+// In a local scope
+function main() {
+  function multiply(a, b) {
+    return a * b;
+  }
+
+  console.log(multiply(3, 4));
+}
+// On the top level
+int multiply(a, b) {
+  return a * b;
+}
+
+// As a class field
+class Multiplier {
+  multiply(a, b) {
+    return a * b;
+  }
+}
+
+// In a local scope
+main() {
+  multiply(a, b) {
+    return a * b;
+  }
+
+  print(multiply(3, 4));
 }
 ```
 
-#### 算术运算符
+### 箭头语法
 
-两种语言的等式和关系运算符几乎相同，如下表所示：
+Dart 和 JavaScript 都支持箭头语法 ( `=>`)，但支持方式有所不同。在 Dart 中，只有当函数包含单个表达式或 return 语句时才能使用箭头语法。
 
-| 意义                             | JavaScript 运算符 | 飞镖操作员 |
-| -------------------------------- | ----------------- | ---------- |
-| 添加                             | `+`               | `+`        |
-| 减去                             | `-`               | `-`        |
-| 一元减号，也称为否定             | `-expr`           | `-expr`    |
-| 乘                               | `*`               | `*`        |
-| 划分                             | `/`               | `/`        |
-| 除法返回整数结果                 |                   | `~/`       |
-| 获取整数除法的余数（模）         | `%`               | `%`        |
-| `x = x + 1`（表达式值为`x + 1`） | `++x`             | `++x`      |
-| `x = x + 1`（表达式值为`x`）     | `x++`             | `x++`      |
-| `x = x - 1`（表达式值为`x - 1`） | `--x`             | `--x`      |
-| `x = x - 1`（表达式值为`x`）     | `x--`             | `x--`      |
-
-例如：
+例如，以下`isNoble`函数是等效的：
 
 ```
-assert(2 + 3 == 5);
-assert(2 - 3 == -1);
-assert(2 * 3 == 6);
-assert(5 / 2 == 2.5); // Result is a double
-assert(5 ~/ 2 == 2); // Result is an int
-assert(5 % 2 == 1); // Remainder
-
-a = 0;
-b = ++a; // Increment a before b gets its value.
-assert(++a); // 1 == 1
-
-a = 0;
-b = a++; // Increment a AFTER b gets its value.
-assert(a != b); // 1 != 0
-
-a = 0;
-b = --a; // Decrement a before b gets its value.
-assert(a == b); // -1 == -1
-
-a = 0;
-b = a--; // Decrement a AFTER b gets its value.
-assert(a != b); // -1 != 0
+bool isNoble(int atomicNumber) {
+  return _nobleGases[atomicNumber] != null;
+}
+bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
 ```
 
-您可能已经注意到，Dart 还包含一个`~/`运算符（称为*截断除法运算符*），该运算符除以双精度数并输出下限整数：
+### 参数
+
+在 JavaScript 中，所有参数都*可以*是位置参数。默认情况下，Dart*要求*您将所有参数作为参数传递给函数。
 
 ```
-assert(25 == 50.4 ~/ 2);
-assert(25 == 50.6 ~/ 2);
-assert(25 == 51.6 ~/ 2);
-```
+int multiply(int a, int b) {
+  return a * b;
+}
 
-#### 相等和关系运算符
-
-两种语言的相等和关系运算符的工作方式相同：
-
-| 意义       | JavaScript 运算符 | 飞镖操作员 |
-| ---------- | ----------------- | ---------- |
-| 严格等于   | `===`             | `==`       |
-| 抽象平等   | `==`              |            |
-| 严格不等于 | `!==`             | `!=`       |
-| 抽象不等于 | `!=`              |            |
-| 比...更棒  | `>`               | `>`        |
-| 少于       | `<`               | `<`        |
-| 大于或等于 | `>=`              | `>=`       |
-| 小于或等于 | `<=`              | `<=`       |
-
-和 JavaScript 运算符没有等效项`==`。`!=`
-
-例如：
-
-```
-assert(2 == 2);
-assert(2 != 3);
-assert(3 > 2);
-assert(2 < 3);
-assert(3 >= 3);
-assert(2 <= 3);
-```
-
-#### 型式试验操作员
-
-两种语言的测试运算符的实现有些不同：
-
-| 意义                          | JavaScript 运算符   | 飞镖操作员 |
-| ----------------------------- | ------------------- | ---------- |
-| 类型转换                      |                     | `x as T`   |
-| 如果对象具有指定类型则为 True | `x instanceof T`    | `x is T`   |
-| 如果对象缺少指定类型则为 True | `!(x instanceof T)` | `x is! T`  |
-
-如果实现 指定的接口，则 的结果`obj is T`为 true 。例如，始终为真。` obj``T``obj is Object? `
-
-使用类型转换运算符 ( `as`) 确保值具有特定类型。*如果您知道*该对象将具有该类型，则编译器可以使用它。
-
-例如：
-
-```
-(person as Employee).employeeNumber = 4204583;
-```
-
-如果您不*知道*该对象的类型`T`，请在使用该对象*之前*`is T`检查类型。
-
-在 Dart 中，局部变量的类型在 if 语句的范围内更新。实例变量的情况并非如此。
-
-```
-if (person is Employee) {
-   person.employeeNumber = 4204583;
+main() {
+  multiply(3, 5); // Valid. All parameters are provided.
+  multiply(3); // Invalid. All parameters must be provided.
 }
 ```
 
-#### 逻辑运算符
+这可能会在两种情况下发生变化：
 
-您可以使用逻辑运算符反转或组合布尔表达式。两种语言的逻辑运算符是相同的。
+1. 位置参数被标记为可选。
+2. 参数按要求命名但未标记。
 
-| 意义                                               | JavaScript 运算符 | 飞镖操作员 |
-| -------------------------------------------------- | ----------------- | ---------- |
-| 反转下一个表达式（将 false 更改为 true，反之亦然） | `!x`              | `!x`       |
-| 逻辑或                                             | `||`              | `||`       |
-| 逻辑与                                             | `&&`              | `&&`       |
+要定义可选位置参数，请将它们括在任何所需位置参数后面的方括号中。可选参数不能跟在必需参数后面。
 
-JavaScript 允许在需要布尔值的地方使用任何值。然后它将这些值转换为`true`或`false`。JavaScript 将空字符串和数字`0`视为“假”值。Dart 允许`bool`条件中的值以及作为逻辑运算符的操作数。
+由于 null 安全性，可选位置参数必须具有默认值或标记为可为 null。[要了解更多信息，请参阅前面有关 null 安全性](https://dart.cn/guides/language/coming-from/js-to-dart#null-safety)的部分。
 
-例如：
+以下代码包含一个定义可选位置参数的函数的有效示例和两个无效示例。
 
 ```
-if (!done && (col == 0 || col == 3)) {
-  // ...Do something...
+// Valid: `b` has a default value of 5. `c` is marked as nullable.
+multiply(int a, [int b = 5, int? c]) {
+  ...
+}
+// Invalid: a required positional parameter follows an optional one.
+multiply(int a, [int b = 5], int c) {
+  ...
+}
+// Invalid: Neither optional positional parameter has a default
+//          value or has been flagged as nullable.
+multiply(int a, [int b, int c]) {
+  ...
 }
 ```
 
-#### 按位和移位运算符
-
-您可以通过对整数使用按位运算符和移位运算符来操作数字的各个位。两种语言的运算符几乎相同，如下表所示：
-
-| 意义                               | JavaScript 运算符 | 飞镖操作员 |
-| ---------------------------------- | ----------------- | ---------- |
-| 按位与                             | `&`               | `&`        |
-| 按位或                             | `|`               | `|`        |
-| 按位异或                           | `^`               | `^`        |
-| 一元按位求补（0 变为 1；1 变为 0） | `~expr`           | `~expr`    |
-| 左移                               | `<<`              | `<<`       |
-| 右移                               | `>>`              | `>>`       |
-| 无符号右移                         | `>>>`             | `>>>`      |
-
-例如：
+以下示例显示如何使用可选参数调用函数：
 
 ```
-final value = 0x22;
-final bitmask = 0x0f;
+multiply(int a, [int b = 5, int? c]) {
+  ...
+}
 
-assert((value & bitmask) == 0x02); // AND
-assert((value & ~bitmask) == 0x20); // AND NOT
-assert((value | bitmask) == 0x2f); // OR
-assert((value ^ bitmask) == 0x2d); // XOR
-assert((value << 4) == 0x220); // Shift left
-assert((value >> 4) == 0x02); // Shift right
-assert((-value >> 4) == -0x03); // Shift right
-assert((value >>> 4) == 0x02); // Unsigned shift right
-assert((-value >>> 4) > 0); // Unsigned shift right
+main() {
+  // All are valid function calls.
+  multiply(3);
+  multiply(3, 5);
+  multiply(3, 5, 7);
+}
 ```
 
-#### 条件运算符
+Dart 支持**命名参数**。这些参数不必像位置参数那样按照定义的顺序提供。您可以通过名称来引用它们。默认情况下，这些是可选的，除非它们被标记为必需。命名参数是通过用大括号括起来来定义的。您可以将命名参数与所需的位置参数组合起来 - 在这种情况下，命名参数始终放置在位置之后。当调用带有命名参数的函数时，通过在传递的值前面加上参数名称作为前缀（用冒号分隔）来传递值。例如，`f(namedParameter: 5)`.
 
-Dart 和 JavaScript 都包含用于计算表达式的条件运算符 ( `?:`)。一些开发人员将其称为三元运算符，因为它需要三个操作数。由于 Dart 有另一个带有三个操作数的运算符 ( `[]=`)，因此将此运算符 ( `?:`) 称为条件运算符。该运算符适用于表达式，就像[if-else](https://dart.cn/language/branches#if)适用于语句一样。
+同样，对于 null 安全性，未按要求标记的命名参数要么需要具有默认值，要么被标记为可为 null。
 
-```
-let visibility = isPublic ? "public" : "private";
-final visibility = isPublic ? 'public' : 'private';
-```
-
-### 赋值运算符
-
-使用 ( `=`) 运算符来赋值。
+以下代码定义了一个带有命名参数的函数：
 
 ```
-// Assign value to a
-a = value;
+// Valid:
+// - `a` has been flagged as required
+// - `b` has a default value of 5
+// - `c` is marked as nullable
+// - Named parameters follow the positional one
+multiply(bool x, {required int a, int b = 5, int? c}) {
+  ...
+}
 ```
 
-该运算符还有一个 null 感知变体 ( `??=`)。
-
-要了解更多信息，请参阅[空赋值](https://dart.cn/guides/language/coming-from/js-to-dart#null-aware-operators)运算符部分。
-
-JavaScript 和 Dart 包含计算新值并将其分配给表达式中的变量的运算符。这些赋值运算符使用右侧值和变量初始值作为操作数。
-
-下表列出了这些赋值运算符：
-
-| 操作员 | 描述           |
-| ------ | -------------- |
-| `=`    | 任务           |
-| `+=`   | 加法作业       |
-| `-=`   | 减法作业       |
-| `*=`   | 乘法作业       |
-| `/=`   | 分区分配       |
-| `~/=`  | 截断除法赋值   |
-| `%=`   | 余数（模）赋值 |
-| `>>>=` | 无符号右移赋值 |
-| `^=`   | 按位异或赋值   |
-| `<<=`  | 左移分配       |
-| `>>=`  | 右移赋值       |
-| `&=`   | 按位与赋值     |
-| `|=`   | 按位或赋值     |
-
-JavaScript 不支持`~/=`赋值运算符。
+以下示例调用具有命名参数的函数：
 
 ```
-var a = 5;
-a *= 2; // Multiply `a` by 2 and assign the result back to a.
-print(a); // `a` is now 10.
+// All are valid function calls.
+// Beyond providing the required positional parameter:
+multiply(false, a: 3); // Only provide required named parameters
+multiply(false, a: 3, b: 9); // Override default value of `b`
+multiply(false, c: 9, a: 3, b: 2); // Provide all named parameters out of order
 ```
 
-### 级联（`..`运算符）
+### 一流的功能
 
-Dart 允许您在单个对象上链接多个方法调用、属性分配或两者。Dart 将此称为*级联*，并使用级联语法 ( `..`) 来执行此操作。
-
-JavaScript 缺乏这种语法。
-
-以下示例显示使用级联语法在新构造的对象上链接多个方法：
+JavaScript 和 Dart 将函数视为一等公民。这意味着 Dart 将函数视为任何其他对象。例如，以下代码显示如何将一个函数作为参数传递给另一个函数：
 
 ```
-var animal = Animal() // Sets multiple properties and methods
-  ..name = "Bob"
-  ..age = 5
-  ..feed()
-  ..walk();
+void printElement(int element) {
+  print(element);
+}
 
-print(animal.name); // "Bob"
-print(animal.age); // 5
+var list = [1, 2, 3];
+
+// Pass printElement as a parameter.
+list.forEach(printElement);
 ```
 
-要使第一个级联语法能够识别空值，请将其写为`?..`.
+### 匿名函数
+
+JavaScript 和 Dart 都支持[*匿名*函数](https://en.wikipedia.org/wiki/Anonymous_function)，或者没有名称的函数。与命名函数一样，您可以像传递任何其他值一样传递匿名函数。例如，将匿名函数存储在变量中，将它们作为参数传递给另一个函数，或者从另一个函数返回它们。
+
+JavaScript 有两种声明匿名函数的方法：
+
+1. 使用标准函数表达式
+2. 使用箭头语法
+
+同样，Dart 也有两种声明匿名函数的方法。两者的工作方式都与 JavaScript 箭头表达式类似。Dart 的匿名函数不支持正则函数表达式附带的额外功能。例如，JavaScript 支持充当构造函数的函数表达式，或者创建对此的自定义绑定。
+
+要了解更多信息，请参阅[课程](https://dart.cn/guides/language/coming-from/js-to-dart#classes)部分。
 
 ```
-var result = maybePerson
-    ?..employment = employer
-    ..salary = salary;
+// A regular function expression
+// assigned to a variable
+let funcExpr = function(a, b) {
+  return a * b;
+}
+// The same anonymous function
+// expressed as an arrow
+// function with curly braces.
+let arrowFuncExpr = (a, b) => {
+  return a * b;
+}
+// An arrow function with only
+// one return statement as
+// its contents does not
+// require a block.
+let arrowFuncExpr2 = (a, b) => a * b;
+// Assign an anonymous function
+// to a variable.
+var blockFunc =
+  optionalCallback ?? (int a, int b) {
+    return a * b;
+};
+
+// For an expression with only a return statement,
+// you can use the arrow syntax:
+var singleFunc = (int a, int b) => a * b;
 ```
 
-`maybePerson`如果值为 ，则 Dart 会忽略整个级联`null`。
+与 JavaScript 一样，您可以将匿名函数传递给其他函数。`map`开发人员在使用数组和列表函数时经常传递匿名函数：
+
+```
+// returns [4, 5, 6]
+[1, 2, 3].map(e => e + 3);
+
+// returns [5, 7, 9]
+[1, 2, 3].map(e => {
+  e *= 2;
+  return e + 3;
+});
+// returns [4, 5, 6]
+[1, 2, 3].map((e) => e + 3).toList();
+
+// returns [5, 7, 9]
+var list2 = [1, 2, 3].map((e) {
+  e *= 2;
+  return e + 3;
+}).toList();
+```
+
+_信息_ **备注：**`map`前面示例中的函数返回 > `Iterable<T`，而不是`List<T>`。该`toList`函数将返回值转换 `Iterable`回`List`.
+
+列表文字可以实现相同的目标。
+
+```
+  // These two statements are equivalent:
+  print([for (var e in [1, 2, 3]) e + 3]);
+  print([1, 2, 3].map((e) => e + 3).toList());
+```
+
+### 发电机功能
+
+两种语言都支持[_生成器函数_](https://dart.cn/language/functions#generators)。这些函数返回一个可迭代的项目集合，这些项目经过计算以避免不必要的工作。
+
+要在 Dart 中编写生成器函数，请`sync*`在函数参数后面添加关键字，并返回`Iterable`. 使用关键字将项目添加到最终的可迭代对象中 `yield`，或使用添加整组项目`yield*`。
+
+以下示例展示了如何编写基本生成器函数：
+
+```
+function* naturalsTo(n) {
+  let k = 0;
+  while (k < n) {
+    yield k++;
+  }
+}
+
+// Returns [0, 1, 2, 3, 4]
+for (let value of naturalsTo(5)) {
+  console.log(value);
+}
+Iterable<int> naturalsTo(int n) sync* {
+  int k = 0;
+  while (k < n) {
+    yield k++;
+  }
+}
+
+// Returns an iterable with [0, 1, 2, 3, 4]
+print(naturalsTo(5).toList());
+function* doubleNaturalsTo(n) {
+  let k = 0;
+  while (k < n) {
+    yield* [k, k];
+    k++;
+  }
+}
+
+// Returns [0, 0, 1, 1, 2, 2]
+for (let value of doubleNaturalsTo(3)) {
+  console.log(value);
+}
+Iterable<int> doubleNaturalsTo(int n) sync* {
+  int k = 0;
+  while (k < n) {
+    yield* [k, k];
+    k++;
+  }
+}
+
+// Returns an iterable with [0, 0, 1, 1, 2, 2]
+print(doubleNaturalsTo(3));
+```
+
+您还可以定义异步生成器函数，它返回流而不是可迭代对象。[在即将到来的异步](https://dart.cn/guides/language/coming-from/js-to-dart#asynchrony)部分中了解更多信息。
+
+## 声明
+
+本节介绍 JavaScript 和 Dart 之间语句的差异。
+
+### 控制流程（if/else、for、while、switch）
+
+大多数控制语句的工作方式与 JavaScript 对应语句类似。[有些集合](https://dart.cn/guides/language/coming-from/js-to-dart#collections)还有其他用途。
+
+#### 迭代
+
+虽然 JavaScript 和 Dart 都有`for-in`循环，但它们的行为不同。
+
+JavaScript 的`for-in`循环迭代对象的属性。要迭代 JavaScript 可迭代对象的元素，必须使用`for-of`or `Array.forEach()`。Dart`for-in`循环的工作方式类似于 JavaScript `for-of`。
+
+以下示例显示了迭代集合并打印出每个元素：
+
+```
+for (const element of list) {
+  console.log(element);
+}
+for (final element in list) {
+  print(element);
+}
+```
+
+#### 转变
+
+_信息_ **备注：** 与 JavaScript 和 Dart 中的语句的一个关键区别`switch`：当 case 没有`break`、 `continue`或`return`语句时，JavaScript 允许执行失败并继续执行下一条语句。然而，Dart 仅在 case 主体为空时才允许这样做。
+
+`continue`在语句中使用时`switch`，可以将其与案例上的标签结合起来：
+
+```
+switch (testEnum) {
+  case TestEnum.A:
+    print('A');
+    continue b;
+  b:
+  case TestEnum.B:
+    print('B');
+    break;
+}
+```
